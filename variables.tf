@@ -3,11 +3,11 @@ variable "resource_group_name" {
   default     = ""
 }
 variable "network_resource_group_name" {
-  description = "A container that holds related resources for an Azure VNET"
+  description = "A container that holds resources for an Azure VNET"
   default     = ""
 }
 variable "location" {
-  description = "The location/region to keep all your network resources. To get the list of all locations with table format from azure cli, run 'az account list-locations -o table'"
+  description = "The location/region to keep all your network/other resources. To get the list of all locations with table format from azure cli, run 'az account list-locations -o table'"
   default     = "westus2"
 }
 
