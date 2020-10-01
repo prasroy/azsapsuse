@@ -1,10 +1,10 @@
 variable "resource_group_name" {
   description = "A container that holds related resources for an Azure solution"
-  default     = "MSFTdemo-sbx-rg"
+  default     = ""
 }
 variable "network_resource_group_name" {
   description = "A container that holds related resources for an Azure VNET"
-  default     = "MSFTdemo-network-westus2"
+  default     = ""
 }
 variable "location" {
   description = "The location/region to keep all your network resources. To get the list of all locations with table format from azure cli, run 'az account list-locations -o table'"
@@ -13,17 +13,17 @@ variable "location" {
 
 variable "virtual_network_name" {
   description = "The name of the virtual network"
-  default     = "MSFTdemo-vnet"
+  default     = ""
 }
 
 variable "subnet_name" {
   description = "The name of the subnet to use in VM scale set"
-  default     = "management"
+  default     = ""
 }
 
 variable "virtual_machine_name" {
   description = "The name of the virtual machine."
-  default     = "msftdemo-ad"
+  default     = ""
 }
 
 variable "os_flavor" {
@@ -97,6 +97,18 @@ variable "windows_distribution_list" {
       sku       = "2019-Datacenter"
       version   = "latest"
     },
+    windows2016dc = {
+      publisher = "MicrosoftWindowsServer"
+      offer     = "WindowsServer"
+      sku       = "2016-Datacenter"
+      version   = "latest"
+    },
+    windows2012r2dc = {
+      publisher = "MicrosoftWindowsServer"
+      offer     = "WindowsServer"
+      sku       = "2012-R2-Datacenter"
+      version   = "latest"
+    },
   }
 }
 
@@ -117,7 +129,7 @@ variable "admin_username" {
 
 variable "admin_password" {
   description = "The Password which should be used for the local-administrator on this Virtual Machine"
-  default     = "YXKjul27J7pHQj7CdkC1"
+  default     = ""
 }
 
 variable "nsg_inbound_rules" {
@@ -163,6 +175,6 @@ variable "tags" {
   default     = {
     ProjectName  = "demo-internal"
     Env          = "dev"
-    BusinessUnit = "CORP"
+    Organization = "MsCorp-SAP"
   }
 }
