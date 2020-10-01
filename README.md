@@ -12,24 +12,22 @@ Active Directory must be supported by DNS to function properly, and Microsoft re
 
 ```hcl
 module "virtual-machine" {
-  source  = "kumarvna/active-directory-forest/azurerm"
-  version = "2.0.0"
 
   # Resource Group, location, VNet and Subnet details
-  resource_group_name  = "rg-hub-demo-internal-shared-westeurope-001"
+  resource_group_name  = "rg-hub-internal-management-westeurope"
   location             = "westeurope"
-  virtual_network_name = "vnet-default-hub-westeurope"
-  subnet_name          = "snet-management-default-hub-westeurope"
+  virtual_network_name = "vnet-hub-westeurope"
+  subnet_name          = "subnet-hub-management-westeurope"
 
   # This module support multiple Pre-Defined Linux and Windows Distributions.
   # Windows Images: windows2012r2dc, windows2016dc, windows2019dc
   virtual_machine_name               = "vm-testdc"
   windows_distribution_name          = "windows2019dc"
   virtual_machine_size               = "Standard_A2_v2"
-  admin_username                     = "batman"
-  admin_password                     = "P@$$w0rd1234!"
+  admin_username                     = "azureadmin"
+  admin_password                     = "P@$$w0rd1234"
   private_ip_address_allocation_type = "Static"
-  private_ip_address                 = ["10.1.2.4"]
+  private_ip_address                 = ["10.100.1.4"]
 
   # Active Directory domain and netbios details
   # Intended for test/demo purposes
@@ -39,7 +37,7 @@ module "virtual-machine" {
 
   # Network Seurity group port allow definitions for each Virtual Machine
   # NSG association to be added automatically for all network interfaces.
-  # SSH port 22 and 3389 is exposed to the Internet recommended for only testing.
+  # SSH port 53 and 3389 is exposed to the Internet recommended for only testing.
   # For production environments, we recommend using a VPN or private connection
   nsg_inbound_rules = [
     {
@@ -60,9 +58,7 @@ module "virtual-machine" {
   tags = {
     ProjectName  = "demo-internal"
     Env          = "dev"
-    Owner        = "user@example.com"
-    BusinessUnit = "CORP"
-    ServiceClass = "Gold"
+    Organization = "MsCorp-SAP"
   }
 }
 ```
@@ -151,12 +147,10 @@ In the Source and Destination columns, `VirtualNetwork`, `AzureLoadBalancer`, an
 
 ```hcl
 module "vnet-hub" {
-  source  = "kumarvna/active-directory-forest/azurerm"
-  version = "2.0.0"
 
   # .... omitted
   
-  virtual_machine_name       = "vm-testdc"
+  virtual_machine_name       = "vm-addc"
   windows_distribution_name  = "windows2019dc"
   virtual_machine_size       = "Standard_A2_v2"
   
@@ -184,7 +178,7 @@ Well-defined naming and metadata tagging conventions help to quickly locate and 
 
 ### Resource naming
 
-An effective naming convention assembles resource names by using important resource information as parts of a resource's name. For example, using these [recommended naming conventions](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#example-names), a public IP resource for a production SharePoint workload is named like this: `pip-sharepoint-prod-westus-001`.
+An effective naming convention assembles resource names by using important resource information as parts of a resource's name. For example, using these [recommended naming conventions](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#example-names), a public IP resource for a production SharePoint workload is named like this: `pip-sharepoint-prod-westeurope-001`.
 
 > ### Metadata tags
 
@@ -211,11 +205,9 @@ End Date of the Project|Date when this application, workload, or service is plan
 
 ```hcl
 module "vnet-hub" {
-  source  = "kumarvna/active-directory-forest/azurerm"
-  version = "2.0.0"
 
   # Resource Group, location, VNet and Subnet details
-  resource_group_name  = "rg-hub-demo-internal-shared-westeurope-001"
+  resource_group_name  = "rg-hub-internal-management-westeurope"
 
   # ... omitted
 
@@ -223,8 +215,7 @@ module "vnet-hub" {
     ProjectName  = "demo-internal"
     Env          = "dev"
     Owner        = "user@example.com"
-    BusinessUnit = "CORP"
-    ServiceClass = "Gold"
+    Organization = "MsCorp-SAP"
   }
 }
 ```
