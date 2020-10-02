@@ -178,11 +178,11 @@ Well-defined naming and metadata tagging conventions help to quickly locate and 
 
 ### Resource naming
 
-An effective naming convention assembles resource names by using important resource information as parts of a resource's name. For example, using these [recommended naming conventions](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#example-names), a public IP resource for a production SharePoint workload is named like this: `pip-sharepoint-prod-westeurope-001`.
+An effective naming convention assembles resource names by using important resource information as parts of a resource's name. Please refer here to know more [recommended naming conventions](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#example-names).
 
 > ### Metadata tags
 
-When applying metadata tags to the cloud resources, you can include information about those assets that couldn't be included in the resource name. You can use that information to perform more sophisticated filtering and reporting on resources. This information can be used by IT or business teams to find resources or generate reports about resource usage and billing.
+When applying metadata tags to the cloud resources, you can include information about those assets that couldn't be included in the resource name. You can use that information to perform more sophisticated filtering while managing and governing those resources.  This information can be used by either  IT or business teams to find resources or generate reports about their resource usage and billing.
 
 The following list provides the recommended common tags that capture important context and information about resources. Use this list as a starting point to establish your tagging conventions.
 
